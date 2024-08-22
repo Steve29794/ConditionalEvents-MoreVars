@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ce.ajneb97</groupId>
-    <artifactId>ConditionalEvents</artifactId>
+    <artifactId>ConditionalEvents-MoreVars</artifactId>
     <version>4.57.3</version>
 
     <properties>
