@@ -9,7 +9,10 @@ import ce.ajneb97.utils.OtherUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.attribute.Attributable;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -146,7 +149,11 @@ public class ConditionEvent {
         String victimType = entity.getType().name();
         String victimName = "";
         String victimNameColorFormat = "";
+        String victimHealth = "";
+        String victimMaxHealth = "";
         String victimUuid = entity.getUniqueId().toString();
+        if (entity instanceof Damageable) victimHealth = String.valueOf(((Damageable) entity).getHealth());
+        if (entity instanceof Attributable) victimMaxHealth = String.valueOf(((Attributable) entity).getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
         if(entity.getCustomName() != null) {
             victimName = ChatColor.stripColor(entity.getCustomName());
             victimNameColorFormat = entity.getCustomName().replace("§", "&");
@@ -161,6 +168,8 @@ public class ConditionEvent {
         eventVariables.add(new StoredVariable("%victim_block_z%",location.getBlockZ()+""));
         eventVariables.add(new StoredVariable("%victim_block_world%",location.getWorld().getName()));
         eventVariables.add(new StoredVariable("%victim_uuid%",victimUuid));
+        eventVariables.add(new StoredVariable("%victim_health%",victimHealth));
+        eventVariables.add(new StoredVariable("%victim_max_health%",victimMaxHealth));
         return this;
     }
 
